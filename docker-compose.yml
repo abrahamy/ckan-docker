@@ -55,7 +55,7 @@ services:
     
   datapusher:
     build:
-      context: ./datapusher-plus/datapusher-plus/0.15.0/
+      context: ./datapusher-plus
       dockerfile: Dockerfile
     networks:
       - ckannet
