@@ -41,4 +41,4 @@ EXPOSE 8800
 
 ENV JOB_CONFIG=/home/app/.env
 
-CMD [ "uwsgi", "--socket=/tmp/uwsgi.sock", "--enable-threads", "-i", "./uwsgi.ini", "--wsgi-file=datapusher_plus.wsgi" ]
+CMD [ "uwsgi", "--socket=/tmp/uwsgi.sock", "--enable-threads", "-i", "/home/app/uwsgi.ini", "--wsgi-file=datapusher_plus.wsgi" ]
