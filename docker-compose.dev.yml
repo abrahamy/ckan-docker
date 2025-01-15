@@ -21,7 +21,6 @@ services:
       - db
       - solr
       - redis
-      - datapusher
     ports:
       - "0.0.0.0:${CKAN_PORT_HOST}:5000"
     volumes:
@@ -34,20 +33,6 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
-      interval: 60s
-      timeout: 10s
-      retries: 3
-
-  datapusher:
-    build:
-      context: ./datapusher-plus
-      dockerfile: Dockerfile
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8800"]
       interval: 60s
       timeout: 10s
       retries: 3
@@ -65,9 +50,6 @@ services:
       - DATASTORE_READONLY_USER
       - DATASTORE_READONLY_PASSWORD
       - DATASTORE_DB
-      - DATAPUSHER_JOBS_USER
-      - DATAPUSHER_JOBS_PASSWORD
-      - DATAPUSHER_JOBS_DB
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
